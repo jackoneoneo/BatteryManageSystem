@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello world</title>
+</head>
+<body>
+   Hello world
+</body>
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', '/Login', true);
+    xhr.send();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) { // 读取完成
+            if (xhr.status == 200) {
+               console.log( xhr.responseText);
+            }
+        }
+    }
+</script>
+</html>
