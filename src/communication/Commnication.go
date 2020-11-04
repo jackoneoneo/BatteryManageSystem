@@ -107,9 +107,9 @@ func handConn() {
 	for {
 		var wg sync.WaitGroup
 		wg.Add(len(CBmsSysConfMap))
+		//防止采集过快
+		time.Sleep(time.Duration(5) * time.Millisecond)
 		for _, v := range CBmsSysConfMap {
-			//防止采集过快
-			time.Sleep(time.Duration(5) * time.Millisecond)
 			go handle(v, PerPackageCacheBuffMap[1], ContentCacheBuffMap[1], &wg)
 		}
 		wg.Wait()

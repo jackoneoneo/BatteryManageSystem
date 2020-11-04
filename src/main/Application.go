@@ -7,6 +7,7 @@ import (
 	"os"
 	"time"
 	"tool"
+	"web"
 )
 
 /*
@@ -104,8 +105,8 @@ func handle_2(c *tool.CountDownLatch) {
 	c.CountDown()
 }
 func main() {
-
-	communication.CBmsServer()
+	go communication.CBmsServer()
+	web.StartWeb()
 	//fmt.Println("hello world")
 
 	//countDownLatch := tool.CountDownLatch{Count: 2}
