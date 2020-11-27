@@ -4,18 +4,12 @@ import (
 	"bytes"
 	"encoding/binary"
 	"entity"
-	"github.com/labstack/gommon/log"
 )
 
 /**
   初始化共享内存
 */
-var CBmsRealTimeMap map[int]entity.CBmsInfo
-
-func init() {
-	log.Info("初始化共享内存")
-	CBmsRealTimeMap = make(map[int]entity.CBmsInfo) //创建C-BMS的内存信息共享内存
-}
+var CBmsRealTimeMap = make(map[int]entity.CBmsInfo) // C-BMS的实时数据
 
 type PackInfo struct {
 }

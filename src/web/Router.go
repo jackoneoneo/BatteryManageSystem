@@ -8,10 +8,6 @@ import "net/http"
 
 func Router() {
 	http.HandleFunc("/Login", Login)
-	//http.Handle("/pages/", http.StripPrefix("/pages/", http.FileServer(http.Dir("static/pages"))))
-	//http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("static/js"))))
-	//web.Router()
-	//http.ListenAndServe(":8080", nil)
 }
 
 /**
@@ -21,5 +17,5 @@ func StartWeb() {
 	http.Handle("/pages/", http.StripPrefix("/pages/", http.FileServer(http.Dir("static/pages"))))
 	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("static/js"))))
 	Router()
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8099", nil)
 }

@@ -2,11 +2,6 @@ package main
 
 import (
 	"communication"
-	"fmt"
-	"log"
-	"os"
-	"time"
-	"tool"
 	"web"
 )
 
@@ -22,18 +17,15 @@ type Name struct {
 初始化日志文件
 */
 func init() {
-	println("系统初始化入口")
-	//fmt.Println("main init")
-	file := "./" + "bms.log"
-	logFile, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0766)
-	if err != nil {
-		panic(err)
-	}
-	log.SetOutput(logFile) // 将文件设置为log输出的文件
-	log.SetFlags(log.LstdFlags | log.Lshortfile | log.LUTC)
-}
-func initLog() {
-
+	//println("系统初始化入口")
+	////fmt.Println("main init")
+	//file := "./" + "bms.log"
+	//logFile, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0766)
+	//if err != nil {
+	//	panic(err)
+	//}
+	//log.SetOutput(logFile) // 将文件设置为log输出的文件
+	//log.SetFlags(log.LstdFlags | log.Lshortfile | log.LUTC)
 }
 
 type Node struct {
@@ -83,59 +75,7 @@ func (this *Node) Less(other interface{}) bool {
 
 //}
 
-type TestStructTobytes struct {
-	name uint8
-	data uint16
-}
-type SliceMock struct {
-	addr uintptr
-	len  int
-	cap  int
-}
-
-func handle_1(c *tool.CountDownLatch) {
-	time.Sleep(time.Duration(3) * time.Second)
-	fmt.Println("hand1")
-	c.CountDown()
-}
-
-func handle_2(c *tool.CountDownLatch) {
-	time.Sleep(time.Duration(5) * time.Second)
-	fmt.Println("hand2")
-	c.CountDown()
-}
 func main() {
 	go communication.CBmsServer()
 	web.StartWeb()
-	//fmt.Println("hello world")
-
-	//countDownLatch := tool.CountDownLatch{Count: 2}
-	//	//go handle_1(&countDownLatch)
-	//	//go handle_2(&countDownLatch)
-	//	//countDownLatch.Await()
-	//	//fmt.Println("结束了")
-
-	//gather.CBmsServer()
-	//	ddd := []byte{2,1,3,3}
-	//	println(len(ddd))
-	//var b bytes.Buffer
-	//n, _ := b.Write(ddd)
-	//println(n)
-	//n, _  = b.Write(ddd)
-	//println(b.Bytes()[7])
-	//demo := num[0:len(num)-2]
-	//
-	//println(len(demo))
-
-	//var testStruct = &TestStructTobytes{100,23}
-	//Len := unsafe.Sizeof(*testStruct)
-	//fmt.Println(Len)
-	//testBytes := &SliceMock{
-	//	addr: uintptr(unsafe.Pointer(testStruct)),
-	//	cap:  int(Len),
-	//	len:  int(Len),
-	//}
-	//data := *(*[]byte)(unsafe.Pointer(testBytes))
-	//fmt.Printf("%x    ", data)
-
 }

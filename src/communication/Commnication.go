@@ -76,7 +76,7 @@ func HeartCmd() []byte {
   建立与C-BMS通讯的服务器
 */
 const (
-	port = ":8888"
+	port = ":9999"
 )
 
 //建立服务器
@@ -93,7 +93,6 @@ func CBmsServer() {
 			continue
 		}
 		ip := strings.Split(conn.RemoteAddr().String(), ":")[0]
-
 		ConMap[ip] = conn
 	}
 
@@ -103,7 +102,6 @@ func CBmsServer() {
  使用线程来处理多个BC的连接
 */
 func handConn() {
-
 	for {
 		var wg sync.WaitGroup
 		wg.Add(len(CBmsSysConfMap))
@@ -113,6 +111,7 @@ func handConn() {
 			go handle(v, PerPackageCacheBuffMap[1], ContentCacheBuffMap[1], &wg)
 		}
 		wg.Wait()
+		// TODO 根据C-BMS的实时数据统计A-BMS的实时数据
 	}
 
 }

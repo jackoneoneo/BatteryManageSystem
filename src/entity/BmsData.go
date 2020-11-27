@@ -1,8 +1,11 @@
 package entity
 
 const (
-	CBmsBmuNum = 20
-	CBmsHmuNum = 5
+	CBmsBmuNum  = 20
+	CBmsHmuNum  = 5
+	HmuTempNum  = 3
+	MBmsCellNum = 20
+	MBmsTempNum = 20
 )
 
 type CBmsInfo struct {
@@ -75,11 +78,6 @@ type CDmuInfo struct {
 	DmuRes         [16]uint8 //预留
 }
 
-const (
-	MBmsCellNum = 20
-	MBmsTempNum = 20
-)
-
 type MBmsInfo struct {
 	CellNum         uint8               /*电池单体个数*/
 	TempNum         uint8               /*温度个数*/
@@ -113,8 +111,6 @@ type ExtremumData struct {
 	SOCMax    uint8 /* 最高SOC */
 	SOCMin    uint8 /* 最低SOC */
 }
-
-const HmuTempNum = 3
 
 type CHmuInfo struct {
 	HMUFrameFlag          uint16             /*HMU主动上报的帧 	*/
