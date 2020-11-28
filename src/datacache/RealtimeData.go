@@ -16,7 +16,7 @@ const (
 	HmuTempNum  = 3
 	MBmsCellNum = 20
 	MBmsTempNum = 20
-	MaxCBmsSize = 10
+	MaxCBmsSize = 4
 )
 
 //BMS的数据点

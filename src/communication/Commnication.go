@@ -5,6 +5,7 @@ package communication
 */
 import (
 	"bytes"
+	"datacache"
 	"fmt"
 	"github.com/labstack/gommon/log"
 	"net"
@@ -44,6 +45,15 @@ const (
 	FrameTypeReceiveData     = 0x82 //BC 采集数据
 	FrameTypeReceiveDataCmd  = 0x85 //BC CMD数据
 )
+
+type ComBuff struct {
+	tempComBuf      [datacache.MaxCBmsSize][1024]byte     //通讯时的临时buf
+	protocolMsgList [datacache.MaxCBmsSize]TcpProtocolMsg //用来发送的的给C-BMS的结构体
+	rxComBuff       [datacache.MaxCBmsSize][512]byte      //接受的buf
+	TxComBuff       [datacache.MaxCBmsSize][4096]byte     //发送的buf
+}
+
+var CommBuffer ComBuff
 
 /**
  *
