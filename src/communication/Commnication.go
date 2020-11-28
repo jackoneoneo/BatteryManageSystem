@@ -1,7 +1,7 @@
 package communication
 
 /**
-  通讯模块
+  通讯模块，主要功能是实现A-BMS于C-BMS的实时通讯
 */
 import (
 	"bytes"
@@ -18,15 +18,15 @@ var PerPackageCacheBuffMap = make(map[int][]byte) // 存放C-BMS每包的缓存
 var ContentCacheBuffMap = make(map[int]bytes.Buffer)
 var ConMap = make(map[string]net.Conn) //保存当前连接
 func init() {
-	// 加载系统文件
-	println("加载系统文件")
-	loadSysConfig()
-	CBmsSysConfMap[1] = "127.0.0.1"
-	PerPackageCacheBuffMap[1] = make([]byte, MaxSizePerPacket)
-	ContentCacheBuffMap[1] = bytes.Buffer{}
-	//CBmsSysConfMap[2] = "192.168.200.222"
-	//PerPackageCacheBuffMap[2]  = make([]byte, MaxSizePerPacket)
-	//ContentCacheBuffMap[2] = bytes.Buffer{}
+	//// 加载系统文件
+	//println("加载系统文件")
+	//loadSysConfig()
+	//CBmsSysConfMap[1] = "127.0.0.1"
+	//PerPackageCacheBuffMap[1] = make([]byte, MaxSizePerPacket)
+	//ContentCacheBuffMap[1] = bytes.Buffer{}
+	////CBmsSysConfMap[2] = "192.168.200.222"
+	////PerPackageCacheBuffMap[2]  = make([]byte, MaxSizePerPacket)
+	////ContentCacheBuffMap[2] = bytes.Buffer{}
 
 }
 
@@ -103,10 +103,9 @@ func CBmsServer() {
 */
 func handConn() {
 	for {
+		time.Sleep(time.Duration(5) * time.Millisecond) //防止采集过快
 		var wg sync.WaitGroup
 		wg.Add(len(CBmsSysConfMap))
-		//防止采集过快
-		time.Sleep(time.Duration(5) * time.Millisecond)
 		for _, v := range CBmsSysConfMap {
 			go handle(v, PerPackageCacheBuffMap[1], ContentCacheBuffMap[1], &wg)
 		}
@@ -129,7 +128,6 @@ func handle(key string, buffer []byte, dataBuffer bytes.Buffer, wg *sync.WaitGro
 		wg.Done()
 		return
 	}
-
 	defer conn.Close() //发生异常把连接断开
 
 	conn.SetDeadline(time.Now().Add(10 * time.Millisecond))

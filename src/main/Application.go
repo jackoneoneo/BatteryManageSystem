@@ -1,10 +1,5 @@
 package main
 
-import (
-	"communication"
-	"web"
-)
-
 /*
 
  */
@@ -76,6 +71,7 @@ func (this *Node) Less(other interface{}) bool {
 //}
 
 func main() {
-	go communication.CBmsServer()
-	web.StartWeb()
+	//go communication.CBmsServer()
+	//web.StartWeb()
+
 }
